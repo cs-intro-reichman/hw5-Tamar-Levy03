@@ -8,6 +8,12 @@ public class MyString {
         System.out.println(countChar(hello, 'l'));
         System.out.println(countChar(hello, 'z'));
         System.out.println(spacedString(hello));
+        System.out.println(randomStringOfLetters(5));
+        System.out.println(lowerCase("HELLO"));
+        System.out.println(equals("hello", "hello"));
+        System.out.println(equalsIgnoreCase("hello", "HeLlo"));
+        System.out.println(isContain("runi", "running"));
+        System.out.println(isContain("runi", "rnnt"));
         //// Put your other tests here.
     }
 
@@ -21,7 +27,13 @@ public class MyString {
      */
     public static int countChar(String str, char ch) {
         //// Replace the following statement with your code
-        return 0;
+        int counter = 0;
+        for(int i = 0; i < str.length(); i++){
+            if (str.charAt(i) == ch) {
+                counter++;
+            }
+        }
+        return counter;
     }
 
     /** Returns true if str1 is a subset string str2, false otherwise
@@ -37,6 +49,26 @@ public class MyString {
      */
     public static boolean subsetOf(String str1, String str2) {
          //// Replace the following statement with your code
+         if (str1.isEmpty()) {
+            return true;
+         }
+         if (str1.length() > str2.length()) {
+            return false;
+         }
+        boolean ifsub = false;
+        for(int i = 0; i < str2.length()-str1.length() + 1; i++){
+                ifsub = true;
+                for(int j = 1; j<str1.length(); j++)
+                {
+                    if (str1.charAt(j) != str2.charAt(i+j)) {
+                        ifsub = false;
+                        break;
+                    }
+                }
+                if (ifsub) {
+                    return true;
+                }
+        }
         return false;
     }
 
@@ -50,7 +82,15 @@ public class MyString {
      */
     public static String spacedString(String str) {
         //// Replace the following statement with your code
-        return null;
+        if (str == "") {
+            return str;
+        }
+        String newStr = "";
+        for(int i = 0; i < str.length() - 1 ; i++){
+            newStr += str.charAt(i) + " ";
+        }
+        newStr = newStr + str.charAt(str.length()-1);
+        return newStr;
     }
   
     /**
@@ -65,7 +105,13 @@ public class MyString {
      */
     public static String randomStringOfLetters(int n) {
         //// Replace the following statement with your code
-        return null;
+        double random = Math.random()*26;
+        String str = "";
+        for(int i = 0; i < n; i++){
+            str = str + (char)(97 + ((int)random));
+            random = Math.random()*26;
+        }
+        return str;
     }
 
     /**
@@ -79,7 +125,89 @@ public class MyString {
      */
     public static String remove(String str1, String str2) {
        //// Replace the following statement with your code
-        return null;
+       String newStr = "";
+       boolean found = false;
+       if (str2 == "") {
+        return str1;
+       }
+       for (int i = 0; i < str2.length(); i++){
+        for(int j = 0; j < str1.length(); j++){
+            if (str2.charAt(i) == str1.charAt(j) && !found) {
+                found = true;
+            }
+            else{
+                newStr += str1.charAt(j);
+            }
+        }
+        str1 = newStr;
+        newStr = "";
+        found = false;
+    }
+    return str1;
+    }
+
+
+    // funcation that gets 2 string and return true if they equals
+    public static Boolean equals(String str1, String str2){
+        if (str1 == null || str2 == null) {
+            return false;
+        }
+        if (str1.length() != str2.length()) {
+            return false;
+        }
+        for(int i = 0; i < str1.length(); i++){
+            if (str1.charAt(i) != str2.charAt(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // funcation that get a string and return him with only lower case letter
+    public static String lowerCase(String str){
+        String newStr = "";
+        for(int i = 0; i < str.length(); i++){
+            if (str.charAt(i) > 64 && str.charAt(i) < 91) {
+                newStr += (char)(str.charAt(i)+ 32);
+            }
+            else{
+                newStr += str.charAt(i);
+            }
+        }
+        return newStr;
+    }
+
+
+    // funcation that gets 2 string and return true if thet equals without considerd if they have lower case or upper case letters
+    public static Boolean equalsIgnoreCase(String str1, String str2){
+        str1 = lowerCase(str1);
+        str2 = lowerCase(str2);
+        if (equals(str1, str2)) {
+            return true;
+        }
+        return false;
+    }
+
+
+    //funcation that gets 2 string and chech if all the letters of the first one is in the other (not necessarliy in a sequence)
+    public static boolean isContain(String str1, String str2){
+        if (subsetOf(str1, str2)) {
+            return true;
+        }
+        boolean found = false;
+        for(int i = 0; i < str1.length(); i++){
+            found = false;
+            for(int j = 0; j < str2.length(); j++){
+                if (str1.charAt(i) == str2.charAt(j)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
