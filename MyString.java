@@ -182,53 +182,6 @@ public class MyString {
         return false;
     }
 
-    // funcation that gets 2 string and chech if all the letters of the first one is
-    // in the other (not necessarliy in a sequence)
-    public static boolean isContain(String str1, String str2) {
-        if (subsetOfSequence(str1, str2)) {
-            return true;
-        }
-        boolean found = false;
-        for (int i = 0; i < str1.length(); i++) {
-            found = false;
-            for (int j = 0; j < str2.length(); j++) {
-                if (str1.charAt(i) == str2.charAt(j)) {
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    // funcation that gets 2 string and check if one is contain in the other (necessarliy in a sequence)
-    public static boolean subsetOfSequence(String str1, String str2) {
-        //// Replace the following statement with your code
-        if (str1.isEmpty()) {
-            return true;
-        }
-        if (str1.length() > str2.length()) {
-            return false;
-        }
-        boolean ifsub = false;
-        for (int i = 0; i < str2.length() - str1.length() + 1; i++) {
-            ifsub = true;
-            for (int j = 1; j < str1.length(); j++) {
-                if (str1.charAt(j) != str2.charAt(i + j)) {
-                    ifsub = false;
-                    break;
-                }
-            }
-            if (ifsub) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     /**
      * Returns a string consisting of the given string, with the given
      * character inserted randomly somewhere in the string.

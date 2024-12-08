@@ -205,6 +205,6 @@ public class Scrabble {
 		init();
 		// playHand("ocostrza");
 		// playHand("arbffip");
-		playHand("aretiin");
+		// playHand("aretiin");
 	}
 }
